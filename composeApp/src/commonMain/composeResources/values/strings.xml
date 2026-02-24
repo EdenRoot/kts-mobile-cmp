@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">KTS Mobile CMP</string>
+
+    <string name="welcome_text">Добро пожаловать!</string>
+    <string name="continue_button">Продолжить</string>
+
+    <!-- auth/welcome Rows -->
+    <!-- Row 1 -->
+    <string name="course_kotlin_development">Разработка на Kotlin</string>
+    <string name="course_b2b_marketing">B2B Маркетинг</string>
+    <string name="course_content_marketing">Контент-маркетинг</string>
+    <string name="course_rabbitmq">RabbitMQ</string>
+    <string name="course_cinema_4d">Cinema 4D</string>
+    <string name="course_parsing">Парсинг</string>
+    <string name="course_google_analytics">Google Analytics</string>
+    <string name="course_three_js">Three.js</string>
+
+    <!-- Row 2 -->
+    <string name="course_python_development">Разработка на Python</string>
+    <string name="course_big_data">Big Data</string>
+    <string name="course_ux_researcher">UX Исследования</string>
+    <string name="course_web_analytics">Веб-аналитика</string>
+    <string name="course_ui_design">UI Дизайн</string>
+    <string name="course_web_design">Веб-дизайн</string>
+    <string name="course_prompt_engineering">Prompt Engineering</string>
+    <string name="course_machine_learning">Машинное обучение</string>
+
+    <!-- Row 3 -->
+    <string name="course_artificial_intelligence">Искусственный интеллект</string>
+    <string name="course_java_development">Разработка на Java</string>
+    <string name="course_data_science">Data Science</string>
+    <string name="course_cloud_computing">Облачные вычисления</string>
+    <string name="course_docker_kubernetes">Docker и Kubernetes</string>
+    <string name="course_frontend_dev">Фронтенд-разработка</string>
+    <string name="course_backend_dev">Бэкенд-разработка</string>
+    <string name="course_fullstack_dev">Fullstack-разработка</string>
+
+    <!-- Row 4 -->
+    <string name="course_devops_engineering">DevOps инженерия</string>
+    <string name="course_android_development">Разработка под Android</string>
+    <string name="course_ios_development">Разработка под iOS</string>
+    <string name="course_reactjs">React.js</string>
+    <string name="course_angular">Angular</string>
+    <string name="course_flutter">Flutter</string>
+    <string name="course_blockchain_basics">Базовый курс Blockchain</string>
+    <string name="course_sql_database">SQL базы данных</string>
+
+    <!-- Row 5 -->
+    <string name="course_cyber_security">Кибербезопасность</string>
+    <string name="course_network_administration">Сетевое администрирование</string>
+    <string name="course_bi_analytics">BI Аналитика</string>
+    <string name="course_data_engineering">Data Engineering</string>
+    <string name="course_c_sharp">C#</string>
+    <string name="course_r_language">Язык R</string>
+    <string name="course_golang">Go (Golang)</string>
+    <string name="course_spring_boot">Spring Boot</string>
+
+    <!-- auth/login -->
+
+    <string name="enter_your_email">Введите почту</string>
+    <string name="clear_textfield">Очистить текст</string>
+    <string name="wrong_email">Вы ввели неверный e-mail</string>
+    <string name="title_log_in_profile">Вход в личный кабинет</string>
+    <string name="login_password">Войти с паролем</string>
+    <string name="email_or_phone">Электронная почта или телефон</string>
+    <string name="send_an_email_message">Отправили код на @email</string>
+    <string name="email_code_description">Напишите его, чтобы подтвердить, что это вы, а не кто-то другой входит в личный кабинет</string>
+    <string name="symbol_field">*</string>
+    <string name="confirm_button">Подтвердить</string>
+
+</resources>
