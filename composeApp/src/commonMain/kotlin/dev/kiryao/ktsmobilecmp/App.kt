@@ -47,7 +47,7 @@ fun App() {
                 )
             }
             composable(route = Screen.Verification.name) {
-                VerificationCodeScreen()
+                VerificationCodeScreen({})
             }
         }
     }
