@@ -56,7 +56,6 @@
     <string name="course_spring_boot">Spring Boot</string>
 
     <!-- auth/login -->
-
     <string name="enter_your_email">Введите почту</string>
     <string name="clear_textfield">Очистить текст</string>
     <string name="wrong_email">Вы ввели неверный e-mail</string>
