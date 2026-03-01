@@ -49,6 +49,8 @@ import ktsmobilecmp.composeapp.generated.resources.send_an_email_message
 import ktsmobilecmp.composeapp.generated.resources.send_verification_code_again
 import org.jetbrains.compose.resources.stringResource
 
+private const val VERIFICATION_CODE_LENGTH = 4
+
 @Composable
 fun VerificationCodeScreen(
     onConfirm: (String) -> Unit,
@@ -98,7 +100,7 @@ fun VerificationCodeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        repeat(4) { index ->
+                        repeat(VERIFICATION_CODE_LENGTH) { index ->
                             val char = code.getOrNull(index)?.toString().orEmpty()
                             val isFocused = code.length == index
 
@@ -140,9 +142,9 @@ fun VerificationCodeScreen(
                     BasicTextField(
                         value = code,
                         onValueChange = {
-                            if (it.length <= 4) {
+                            if (it.length <= VERIFICATION_CODE_LENGTH) {
                                 code = it
-                                if (it.length == 4) focusManager.clearFocus()
+                                if (it.length == VERIFICATION_CODE_LENGTH) focusManager.clearFocus()
                             }
                         },
                         modifier = Modifier
@@ -158,7 +160,7 @@ fun VerificationCodeScreen(
 
                 Button(
                     onClick = { onConfirm(code) },
-                    enabled = code.length == 4,
+                    enabled = code.length == VERIFICATION_CODE_LENGTH,
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
                         .fillMaxWidth()
