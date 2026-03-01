@@ -1,6 +1,5 @@
 package dev.kiryao.ktsmobilecmp.auth.login
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.kiryao.ktsmobilecmp.auth.login.components.EntryCard
-import dev.kiryao.ktsmobilecmp.auth.login.components.VerificationCodeScreen
 import dev.kiryao.ktsmobilecmp.ui.theme.KTSMobileTheme
 import ktsmobilecmp.composeapp.generated.resources.Res
 import ktsmobilecmp.composeapp.generated.resources.title_log_in_profile
@@ -28,9 +26,13 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun LoginScreen(
+    onNavigateToVerification: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var isEmailVerify by rememberSaveable { mutableStateOf(false) }
+    var email by rememberSaveable { mutableStateOf("") }
+    var isEmailError by rememberSaveable { mutableStateOf(false) }
+
+    val emailPattern = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
 
     Surface(
         modifier = modifier.fillMaxSize(),
@@ -43,39 +45,38 @@ fun LoginScreen(
                 .statusBarsPadding()
                 .padding(16.dp)
         ) {
-            if (!isEmailVerify) {
-                Text(
-                    text = stringResource(Res.string.title_log_in_profile),
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontWeight = FontWeight.Bold
-                    ),
-                    modifier = Modifier
-                        .align(Alignment.Start)
-                        .padding(top = 16.dp, bottom = 16.dp)
-                )
+            Text(
+                text = stringResource(Res.string.title_log_in_profile),
+                style = MaterialTheme.typography.titleLarge.copy(
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontWeight = FontWeight.Bold
+                ),
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .padding(top = 16.dp, bottom = 16.dp)
+            )
 
-                Spacer(modifier = Modifier.weight(0.3f))
+            Spacer(modifier = Modifier.weight(0.3f))
 
-                EntryCard(
-                    onClick = {
-                        isEmailVerify = true
+            EntryCard(
+                textMail = email,
+                onEmailChange = {
+                    email = it
+                    if (isEmailError) isEmailError = false
+                },
+                isEmailWrong = isEmailError,
+                onClick = {
+                    if (emailPattern.matches(email)) {
+                        isEmailError = false
+                        onNavigateToVerification(email)
+                    } else {
+                        isEmailError = true
                     }
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-            } else {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    VerificationCodeScreen(
-                        onClick = {
-                        }
-                    )
                 }
-            }
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
         }
     }
 }
@@ -86,7 +87,7 @@ fun LoginScreen(
 fun LoginScreenPreview() {
     KTSMobileTheme {
         Surface(color = MaterialTheme.colorScheme.background) {
-            LoginScreen()
+            LoginScreen(onNavigateToVerification = {})
         }
     }
 }

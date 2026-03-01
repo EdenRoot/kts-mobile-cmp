@@ -61,10 +61,12 @@
     <string name="wrong_email">Вы ввели неверный e-mail</string>
     <string name="title_log_in_profile">Вход в личный кабинет</string>
     <string name="login_password">Войти с паролем</string>
-    <string name="email_or_phone">Электронная почта или телефон</string>
+    <string name="email_title">Электронная почта</string>
     <string name="send_an_email_message">Отправили код на @email</string>
     <string name="email_code_description">Напишите его, чтобы подтвердить, что это вы, а не кто-то другой входит в личный кабинет</string>
     <string name="symbol_field">*</string>
     <string name="confirm_button">Подтвердить</string>
 
+    <!-- auth/verification -->
+    <string name="send_verification_code_again">Отправить код повторно</string>
 </resources>

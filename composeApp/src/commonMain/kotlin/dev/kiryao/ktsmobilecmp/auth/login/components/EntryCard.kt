@@ -36,7 +36,7 @@ import dev.kiryao.ktsmobilecmp.ui.theme.KTSMobileTheme
 import ktsmobilecmp.composeapp.generated.resources.Res
 import ktsmobilecmp.composeapp.generated.resources.continue_button
 import ktsmobilecmp.composeapp.generated.resources.course_content_marketing
-import ktsmobilecmp.composeapp.generated.resources.email_or_phone
+import ktsmobilecmp.composeapp.generated.resources.email_title
 import ktsmobilecmp.composeapp.generated.resources.enter_your_email
 import ktsmobilecmp.composeapp.generated.resources.ic_close
 import ktsmobilecmp.composeapp.generated.resources.ic_mail
@@ -46,11 +46,12 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun EntryCard(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
+    textMail: String,
+    onEmailChange: (String) -> Unit,
     isEmailWrong: Boolean = false,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    var textMail by rememberSaveable { mutableStateOf("") }
 
     Card(
         modifier = modifier
@@ -80,7 +81,7 @@ fun EntryCard(
 
             OutlinedTextField(
                 value = textMail,
-                onValueChange = { textMail = it },
+                onValueChange = onEmailChange,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
                 singleLine = true,
@@ -109,7 +110,7 @@ fun EntryCard(
                     Text(
                         text =
                             if (isEmailWrong) stringResource(Res.string.wrong_email)
-                            else stringResource(Res.string.email_or_phone),
+                            else stringResource(Res.string.email_title),
                         color =
                             if (isEmailWrong) MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
                             else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
@@ -119,7 +120,7 @@ fun EntryCard(
                 },
                 trailingIcon = {
                     if (textMail.isNotEmpty()) {
-                        IconButton(onClick = { textMail = "" }) {
+                        IconButton(onClick = { onEmailChange("") }) {
                             Icon(
                                 painter = painterResource(Res.drawable.ic_close),
                                 contentDescription = null,
@@ -169,7 +170,11 @@ fun EntryCard(
 fun EntryCardPreview() {
     KTSMobileTheme {
         Surface(color = MaterialTheme.colorScheme.background) {
-            EntryCard()
+            EntryCard(
+                textMail = "",
+                onEmailChange = {},
+                onClick = {}
+            )
         }
     }
 }
