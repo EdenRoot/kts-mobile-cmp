@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -27,8 +28,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.kiryao.ktsmobilecmp.ui.theme.KTSMobileTheme
 import ktsmobilecmp.composeapp.generated.resources.Res
 import ktsmobilecmp.composeapp.generated.resources.confirm_button
 import ktsmobilecmp.composeapp.generated.resources.email_code_description
@@ -37,7 +40,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun VerificationCodeScreen(
-    onClick: () -> Unit,
+    onClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var code by remember { mutableStateOf("") }
@@ -142,6 +145,17 @@ fun VerificationCodeScreen(
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.bodyMedium
             )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Verification Code Light")
+@Preview(showBackground = true, name = "Verification Code Dark", uiMode = 32)
+@Composable
+fun VerificationCodeScreenPreview() {
+    KTSMobileTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            VerificationCodeScreen()
         }
     }
 }

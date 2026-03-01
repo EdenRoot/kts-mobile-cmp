@@ -18,6 +18,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,10 +27,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.kiryao.ktsmobilecmp.auth.welcome.components.CourseCard
+import dev.kiryao.ktsmobilecmp.auth.welcome.model.CourseName
+import dev.kiryao.ktsmobilecmp.ui.theme.KTSMobileTheme
 import ktsmobilecmp.composeapp.generated.resources.Res
 import ktsmobilecmp.composeapp.generated.resources.continue_button
+import ktsmobilecmp.composeapp.generated.resources.course_content_marketing
 import ktsmobilecmp.composeapp.generated.resources.email_or_phone
 import ktsmobilecmp.composeapp.generated.resources.enter_your_email
 import ktsmobilecmp.composeapp.generated.resources.ic_close
@@ -107,7 +113,8 @@ fun EntryCard(
                         color =
                             if (isEmailWrong) MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
                             else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 1
                     )
                 },
                 trailingIcon = {
@@ -152,6 +159,17 @@ fun EntryCard(
                     )
                 }
             }
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Entry Card Light")
+@Preview(showBackground = true, name = "Entry Card Dark", uiMode = 32)
+@Composable
+fun EntryCardPreview() {
+    KTSMobileTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            EntryCard()
         }
     }
 }

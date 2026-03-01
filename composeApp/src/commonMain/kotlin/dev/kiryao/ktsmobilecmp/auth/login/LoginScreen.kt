@@ -17,9 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.kiryao.ktsmobilecmp.auth.login.components.EntryCard
 import dev.kiryao.ktsmobilecmp.auth.login.components.VerificationCodeScreen
+import dev.kiryao.ktsmobilecmp.ui.theme.KTSMobileTheme
 import ktsmobilecmp.composeapp.generated.resources.Res
 import ktsmobilecmp.composeapp.generated.resources.title_log_in_profile
 import org.jetbrains.compose.resources.stringResource
@@ -74,6 +76,17 @@ fun LoginScreen(
                     )
                 }
             }
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Verification Code Light")
+@Preview(showBackground = true, name = "Verification Code Dark", uiMode = 32)
+@Composable
+fun LoginScreenPreview() {
+    KTSMobileTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            LoginScreen()
         }
     }
 }
