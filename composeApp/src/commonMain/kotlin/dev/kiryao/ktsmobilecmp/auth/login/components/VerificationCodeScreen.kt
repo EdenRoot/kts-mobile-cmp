@@ -74,7 +74,7 @@ fun VerificationCodeScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             repeat(4) { index ->
-                val char = code.getOrNull(index)?.toString() ?: ""
+                val char = code.getOrNull(index)?.toString().orEmpty()
                 val isFocused = code.length == index
 
                 Box(
