@@ -2,7 +2,9 @@ package dev.kiryao.ktsmobilecmp
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,26 +30,29 @@ fun App() {
     KTSMobileTheme {
         val navController = rememberNavController()
 
-        NavHost(
-            navController = navController,
-            startDestination = Screen.Welcome.name
-        ) {
-            composable(route = Screen.Welcome.name) {
-                WelcomeScreen(
-                    onNavigateToLogin = {
-                        navController.navigate(Screen.Login.name)
-                    }
-                )
-            }
-            composable(route = Screen.Login.name) {
-                LoginScreen(
-                    onNavigateToVerification = {
-                        navController.navigate(Screen.Verification.name)
-                    }
-                )
-            }
-            composable(route = Screen.Verification.name) {
-                VerificationCodeScreen({})
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            NavHost(
+                navController = navController,
+                startDestination = Screen.Welcome.name,
+                modifier = Modifier.padding(innerPadding)
+            ) {
+                composable(route = Screen.Welcome.name) {
+                    WelcomeScreen(
+                        onNavigateToLogin = {
+                            navController.navigate(Screen.Login.name)
+                        }
+                    )
+                }
+                composable(route = Screen.Login.name) {
+                    LoginScreen(
+                        onNavigateToVerification = {
+                            navController.navigate(Screen.Verification.name)
+                        }
+                    )
+                }
+                composable(route = Screen.Verification.name) {
+                    VerificationCodeScreen({})
+                }
             }
         }
     }
