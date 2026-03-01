@@ -25,7 +25,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,16 +45,17 @@ fun EntryCard(
     isEmailWrong: Boolean = false,
 ) {
     var textMail by rememberSaveable { mutableStateOf("") }
-    val mainGreen = Color(0xFF12B956)
-    val darkCard = Color(0xFF1E1E1E)
 
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 4.dp),
         shape = RoundedCornerShape(28.dp),
-        border = BorderStroke(1.dp, Color.White.copy(alpha = 0.1f)),
-        colors = CardDefaults.cardColors(containerColor = darkCard)
+        border = BorderStroke(
+            1.dp,
+            MaterialTheme.colorScheme.outline.copy(alpha = 0.1f)
+        ),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Column(
             modifier = Modifier
@@ -66,7 +66,7 @@ fun EntryCard(
             Text(
                 text = stringResource(Res.string.enter_your_email),
                 style = MaterialTheme.typography.titleMedium.copy(
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onSurface,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 0.5.sp
                 )
@@ -80,29 +80,33 @@ fun EntryCard(
                 singleLine = true,
                 isError = isEmailWrong,
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color.Black.copy(alpha = 0.2f),
-                    unfocusedContainerColor = Color.Black.copy(alpha = 0.2f),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White,
-                    focusedBorderColor = mainGreen,
-                    unfocusedBorderColor = Color.White.copy(alpha = 0.1f),
-                    errorBorderColor = Color(0xFFEF5350),
-                    cursorColor = mainGreen
+                    focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                    focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.1f),
+                    errorBorderColor = MaterialTheme.colorScheme.error,
+                    cursorColor = MaterialTheme.colorScheme.primary
                 ),
                 leadingIcon = {
                     Icon(
                         painter = painterResource(Res.drawable.ic_mail),
                         contentDescription = null,
-                        tint = if (isEmailWrong) Color(0xFFEF5350) else Color.Gray,
+                        tint =
+                            if (isEmailWrong) MaterialTheme.colorScheme.error
+                            else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
                         modifier = Modifier.size(20.dp)
                     )
                 },
                 placeholder = {
                     Text(
-                        text = if (isEmailWrong) stringResource(Res.string.wrong_email)
-                        else stringResource(Res.string.email_or_phone),
-                        color = if (isEmailWrong) Color(0xFFEF5350).copy(alpha = 0.7f)
-                        else Color.Gray,
+                        text =
+                            if (isEmailWrong) stringResource(Res.string.wrong_email)
+                            else stringResource(Res.string.email_or_phone),
+                        color =
+                            if (isEmailWrong) MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
+                            else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 },
@@ -112,7 +116,7 @@ fun EntryCard(
                             Icon(
                                 painter = painterResource(Res.drawable.ic_close),
                                 contentDescription = null,
-                                tint = Color.White.copy(alpha = 0.5f),
+                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                                 modifier = Modifier.size(18.dp)
                             )
                         }
@@ -132,10 +136,10 @@ fun EntryCard(
                         .height(54.dp),
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = mainGreen,
-                        contentColor = Color.White,
-                        disabledContainerColor = mainGreen.copy(alpha = 0.2f),
-                        disabledContentColor = Color.White.copy(alpha = 0.3f)
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                        disabledContainerColor = MaterialTheme.colorScheme.primary.copy(0.2f),
+                        disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(0.3f)
                     ),
                     elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
                 ) {

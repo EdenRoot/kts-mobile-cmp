@@ -21,13 +21,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -68,40 +68,52 @@ fun WelcomeScreenMultiRow(
     rows: List<List<CourseName>>,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(color = Color(0xFF151515))
+    Surface(
+        modifier = modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
     ) {
-        Column(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        Box(
+            modifier = modifier
+                .background(color = MaterialTheme.colorScheme.background)
+                .fillMaxSize()
         ) {
-            Text(
-                text = stringResource(Res.string.welcome_text),
-                style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center,
-                color = Color.White,
-                modifier = Modifier.padding(bottom = 24.dp)
-            )
-            rows.forEachIndexed { index, row ->
-                val reverse = index % 2 == 1
-                WelcomeRow(list = row, reverse = reverse)
+            Column(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = stringResource(Res.string.welcome_text),
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.padding(bottom = 24.dp)
+                )
+                rows.forEachIndexed { index, row ->
+                    val reverse = index % 2 == 1
+                    WelcomeRow(list = row, reverse = reverse)
+                }
             }
-        }
-        Button(
-            onClick = onNavigateToLogin,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(top = 16.dp, bottom =  32.dp, start = 16.dp, end = 16.dp)
-                .fillMaxWidth()
-                .height(56.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF12B956))
-        ) {
-            Text(stringResource(Res.string.continue_button), color = Color.White)
+            Button(
+                onClick = onNavigateToLogin,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(top = 16.dp, bottom = 32.dp, start = 16.dp, end = 16.dp)
+                    .fillMaxWidth()
+                    .height(56.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
+            ) {
+                Text(
+                    stringResource(Res.string.continue_button),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
         }
     }
 }
@@ -161,8 +173,21 @@ fun WelcomeCourseCard(
     courseName: CourseName
 ) {
     val rotation = if (courseName.highlighted) -15f else 0f
-    val backgroundColor = if (courseName.highlighted) Color(0xFF12B956) else Color(0xFF1E1E20)
+
+    val backgroundColor = if (courseName.highlighted) {
+        MaterialTheme.colorScheme.primary
+    } else {
+        MaterialTheme.colorScheme.surfaceVariant
+    }
+
+    val contentColor = if (courseName.highlighted) {
+        MaterialTheme.colorScheme.onPrimary
+    } else {
+        MaterialTheme.colorScheme.onSurface
+    }
+
     val elevation = if (courseName.highlighted) 12.dp else 4.dp
+
     Card(
         shape = RoundedCornerShape(50),
         modifier = Modifier
@@ -172,7 +197,10 @@ fun WelcomeCourseCard(
             .graphicsLayer { rotationZ = rotation }
             .then(Modifier),
         elevation = CardDefaults.cardElevation(elevation),
-        colors = CardDefaults.cardColors(containerColor = backgroundColor)
+        colors = CardDefaults.cardColors(
+            containerColor = backgroundColor,
+            contentColor = contentColor
+        )
     ) {
         Box(
             modifier = Modifier
@@ -182,7 +210,7 @@ fun WelcomeCourseCard(
         ) {
             Text(
                 text = stringResource(courseName.text),
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 12.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis

@@ -26,7 +26,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,30 +40,27 @@ fun VerificationCodeScreen(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val mainGreen = Color(0xFF12B956)
-    val darkBg = Color(0xFF151515)
-
     var code by remember { mutableStateOf("") }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(24.dp),
         modifier = modifier
             .fillMaxWidth()
-            .background(darkBg)
+            .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = 16.dp)
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
                 text = stringResource(Res.string.send_an_email_message),
                 style = MaterialTheme.typography.headlineSmall.copy(
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Bold
                 )
             )
             Text(
                 text = stringResource(Res.string.email_code_description),
                 style = MaterialTheme.typography.bodyMedium.copy(
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                     lineHeight = 20.sp
                 )
             )
@@ -82,10 +78,12 @@ fun VerificationCodeScreen(
                     modifier = Modifier
                         .size(width = 70.dp, height = 70.dp)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(Color(0xFF1E1E1E))
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
                         .border(
                             width = 2.dp,
-                            color = if (isFocused) mainGreen else Color.White.copy(alpha = 0.05f),
+                            color =
+                                if (isFocused) MaterialTheme.colorScheme.primary
+                                else MaterialTheme.colorScheme.outline.copy(alpha = 0.1f),
                             shape = RoundedCornerShape(16.dp)
                         ),
                     contentAlignment = Alignment.Center
@@ -93,7 +91,7 @@ fun VerificationCodeScreen(
                     Text(
                         text = char,
                         style = MaterialTheme.typography.headlineMedium.copy(
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Bold
                         )
                     )
@@ -101,7 +99,10 @@ fun VerificationCodeScreen(
                         Box(
                             modifier = Modifier
                                 .size(8.dp)
-                                .background(Color.Gray.copy(alpha = 0.3f), CircleShape)
+                                .background(
+                                    MaterialTheme.colorScheme.onSurfaceVariant.copy(0.3f),
+                                    CircleShape
+                                )
                         )
                     }
                 }
@@ -118,14 +119,15 @@ fun VerificationCodeScreen(
                 .fillMaxWidth()
                 .height(56.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = mainGreen,
-                disabledContainerColor = mainGreen.copy(alpha = 0.2f)
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f)
             )
         ) {
             Text(
                 text = stringResource(Res.string.confirm_button),
                 style = MaterialTheme.typography.titleMedium.copy(
-                    color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
             )
@@ -137,7 +139,7 @@ fun VerificationCodeScreen(
         ) {
             Text(
                 text = "Отправить код повторно",
-                color = mainGreen,
+                color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.bodyMedium
             )
         }
